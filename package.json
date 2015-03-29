@@ -9,6 +9,7 @@
   "author": "Albino Tonnina",
   "license": "ISC",
   "devDependencies": {
+    "chai": "^2.2.0",
     "grunt": "^0.4.5",
     "grunt-cli": "^0.1.13",
     "grunt-contrib-jshint": "^0.11.1",
