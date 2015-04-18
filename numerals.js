@@ -1,33 +1,39 @@
-var get_roman_numeral = function (arabicNumeral){
+var converter = {
 
-    var result = '';
-
-    var alphabet = [
+    alphabet: [
         {
             value: 1000,
             symbol: 'M'
-        }, {
+        },
+        {
             value: 900,
             symbol: 'CM'
-        }, {
+        },
+        {
             value: 500,
             symbol: 'D'
-        }, {
+        },
+        {
             value: 400,
             symbol: 'CD'
-        }, {
+        },
+        {
             value: 100,
             symbol: 'C'
-        }, {
+        },
+        {
             value: 90,
             symbol: 'XC'
-        }, {
+        },
+        {
             value: 50,
             symbol: 'L'
-        }, {
+        },
+        {
             value: 40,
             symbol: 'XL'
-        }, {
+        },
+        {
             value: 10,
             symbol: 'X'
         },
@@ -46,28 +52,32 @@ var get_roman_numeral = function (arabicNumeral){
         {
             value: 1,
             symbol: 'I'
+        }],
+
+
+    arabicToRoman: function (arabicNumeral){
+
+        this.result = '';
+        this.remaining = arabicNumeral;
+
+        for(var i = 0; i < this.alphabet.length; i++){
+            if(this.remaining >= this.alphabet[i].value){
+                this.result += this.alphabet[i].symbol;
+                this.remaining -= this.alphabet[i].value;
+            }
         }
-    ];
 
-
-    // private static final int[]    VALUES  = { 1000, 900,  500, 400,  100, 90,   50,  40,   10,  9,    5,   4,    1   };
-    // private static final String[] SYMBOLS = { "M",  "CM", "D", "CD", "C", "XC", "L", "XL", "X", "IX", "V", "IV", "I" };
-
-
-    var remaining = arabicNumeral;
-
-    for(var i = 0; i < alphabet.length; i++){
-        if(remaining >= alphabet[i].value){
-            result += alphabet[i].symbol;
-            remaining -= alphabet[i].value;
+        for(var i = 0; i < this.remaining; i++){
+            this.result += 'I';
         }
-    }
 
-    for(var i = 0; i < remaining; i++){
-        result += 'I';
+        return this.result;
     }
-
-    return result;
 };
 
-module.exports = get_roman_numeral;
+
+var converterModule = function (arabicNumeral){
+    return Object.create(converter).arabicToRoman(arabicNumeral);
+};
+
+module.exports = converterModule;
