@@ -1,14 +1,14 @@
-# tdd-javascript-coding-dojo
-Mocha
+# Javascript codind dojo - TDD
 
+## Roman Numerals Kata
 
-Red green refactor principle:
+###Red green refactor principle:
     Write a minimum test that fails.
     Write the minimum code to pass the test.
     Refactor
 
 
-Common mistakes:
+###Common mistakes:
     beginners usually forget about important things:
     the minimum qualifier is not optional, it is mandatory for doing TDD the proper way.
     This can help developing with baby steps.
