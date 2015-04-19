@@ -1,83 +1,42 @@
 var converter = {
 
     alphabet: [
-        {
-            value: 1000,
-            symbol: 'M'
-        },
-        {
-            value: 900,
-            symbol: 'CM'
-        },
-        {
-            value: 500,
-            symbol: 'D'
-        },
-        {
-            value: 400,
-            symbol: 'CD'
-        },
-        {
-            value: 100,
-            symbol: 'C'
-        },
-        {
-            value: 90,
-            symbol: 'XC'
-        },
-        {
-            value: 50,
-            symbol: 'L'
-        },
-        {
-            value: 40,
-            symbol: 'XL'
-        },
-        {
-            value: 10,
-            symbol: 'X'
-        },
-        {
-            value: 9,
-            symbol: 'IX'
-        },
-        {
-            value: 5,
-            symbol: 'V'
-        },
-        {
-            value: 4,
-            symbol: 'IV'
-        },
-        {
-            value: 1,
-            symbol: 'I'
-        }],
+        ['M', 1000], ['CM', 900], ['D', 500], ['CD', 400],
+        ['C', 100], ['XC', 90], ['L', 50], ['XL', 40],
+        ['X', 10], ['IX', 9], ['V', 5], ['IV', 4],
+        ['I', 1]
+    ],
 
-
-    arabicToRoman: function (arabicNumeral){
-
-        this.result = '';
-        this.remaining = arabicNumeral;
-
-        for(var i = 0; i < this.alphabet.length; i++){
-            if(this.remaining >= this.alphabet[i].value){
-                this.result += this.alphabet[i].symbol;
-                this.remaining -= this.alphabet[i].value;
+    romanToArabic: function (romanNumeral){
+        var result = 0;
+        for(var i = 0; i < this.alphabet.length; ++i){
+            var pair = this.alphabet[i];
+            var key = pair[0];
+            var value = pair[1];
+            var regex = RegExp('^' + key);
+            while (romanNumeral.match(regex)){
+                result += value;
+                romanNumeral = romanNumeral.replace(regex, '')
             }
         }
+        return result;
 
-        for(var i = 0; i < this.remaining; i++){
-            this.result += 'I';
+    },
+
+    arabicToRoman: function (arabicNumeral){
+        var result = '';
+        for(var i = 0; arabicNumeral > 0 && i < this.alphabet.length; i++){
+            var pair = this.alphabet[i];
+            var key = pair[0];
+            var value = pair[1];
+            while (arabicNumeral >= value){
+                result += key;
+                arabicNumeral -= value;
+            }
         }
-
-        return this.result;
+        return result;
     }
 };
 
 
-var converterModule = function (arabicNumeral){
-    return Object.create(converter).arabicToRoman(arabicNumeral);
-};
-
-module.exports = converterModule;
+module.exports = converter;
