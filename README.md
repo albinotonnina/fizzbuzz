@@ -1,5 +1,7 @@
 # Javascript codind dojo - TDD
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/albinotonnina/tdd-javascript-coding-dojo.svg)](https://greenkeeper.io/)
+
 ## Roman Numerals Kata
 
 ###Red green refactor principle:
